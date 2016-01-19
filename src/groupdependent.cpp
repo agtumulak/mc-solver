@@ -12,23 +12,23 @@ GroupDependent::GroupDependent()
 {}
 
 // Read value
-double GroupDependent::Read( double energy_group ) const
+double GroupDependent::at( double energy ) const
 {
     // Check that group exists
-    assert( data_.find( energy_group ) != data_.end() );
+    assert( data_.find( energy ) != data_.end() );
 
     // Return value
-    return data_.at( energy_group );
+    return data_.at( energy );
 }
 
 // Write value
-void GroupDependent::Write( double energy_group, double value )
+void GroupDependent::Write( double energy, double value )
 {
     // Check input arguments are valid
-    assert( energy_group > 0.0 && value > 0.0 );
+    assert( energy > 0.0 && value > 0.0 );
 
-    // Write value at energy_group
-    data_[ energy_group ] = value; 
+    // Write/overwrite value at energy
+    data_[ energy ] = value;
 }
 
 // Friend functions //

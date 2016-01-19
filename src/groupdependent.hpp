@@ -14,11 +14,13 @@ class GroupDependent
             // Default constructor
             GroupDependent();
 
+            // Accessors and mutators //
+
             // Read value
-            double Read( double energy_group ) const;
+            double at( double energy ) const;
 
             // Write value
-            void Write( double energy_group, double value );
+            void Write( double energy, double value );
 
             // Friend functions //
             
