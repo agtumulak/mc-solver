@@ -18,10 +18,10 @@ class GroupGroupDependent
             GroupGroupDependent();
 
             // Read value
-            GroupDependent Read( double energy_group ) const;
+            GroupDependent at( double energy ) const;
 
             // Write value
-            void Write( double energy_group, GroupDependent value );
+            void Write( double energy_1, double energy_2, double value );
 
             // Friend functions //
             
