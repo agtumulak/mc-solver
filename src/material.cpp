@@ -68,7 +68,7 @@ std::ostream &operator<< ( std::ostream &out, const Material &obj )
     out << "Microscopic fission cross section: \n" << obj.micro_fiss_xsec_ << std::endl;
     out << "Average number of neutrons per fission, nu: " << obj.fiss_nu_ << "\n" << std::endl;
     out << "Energy distribution of fission neutrons, chi: \n" << obj.fiss_chi_ << std::endl;
-    out << "External source: \n" << obj.ext_source_ << std::endl;
+    out << "External source: \n" << obj.ext_source_;
 
     out << std::defaultfloat;
 
