@@ -48,7 +48,11 @@ std::ostream &operator<< ( std::ostream &out, const GroupGroupDependent &obj )
     for( auto it = obj.data_.begin(); it != obj.data_.end(); it++ )
     {
         out << "Group: " << std::scientific << it->first << std::endl;
-        out << it->second << std::endl;
+        out << it->second;
+        if( it != prev( obj.data_.end() ) )
+        {
+            out << std::endl;
+        }
     }
 
     out << std::defaultfloat;
