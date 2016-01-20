@@ -6,6 +6,7 @@
 
 // mc-solver includes
 #include "material.hpp"
+#include "layout.hpp"
 
 int main()
 {
@@ -34,8 +35,12 @@ int main()
     mat_1.WriteExtSource( 0.1, 1.0 );
     mat_1.WriteExtSource( 14.0, 1.0 );
 
+   // Create layout
+    Layout layout_1;
+    layout_1.AddToEnd( mat_1, 100.0, 100 );
+
     // Test
-    std::cout << std::endl << mat_1;
+    std::cout << '\n' << layout_1;
 
     return 0;
 }
