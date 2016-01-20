@@ -13,7 +13,7 @@ GroupDependent::GroupDependent()
 
 // Initialize constructor
 GroupDependent::GroupDependent( double energy, double value ):
-    data_( { energy, value } )
+    data_( {{ energy, value }} )
 {}
 
 // Read value
