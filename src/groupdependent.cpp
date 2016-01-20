@@ -11,6 +11,11 @@
 GroupDependent::GroupDependent()
 {}
 
+// Initialize constructor
+GroupDependent::GroupDependent( double energy, double value ):
+    data_( { energy, value } )
+{}
+
 // Read value
 double GroupDependent::at( double energy ) const
 {
@@ -25,7 +30,7 @@ double GroupDependent::at( double energy ) const
 void GroupDependent::Write( double energy, double value )
 {
     // Check input arguments are valid
-    assert( energy > 0.0 && value > 0.0 );
+    assert( energy > 0.0 && value >= 0.0 );
 
     // Write/overwrite value at energy
     data_[ energy ] = value;

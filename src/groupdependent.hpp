@@ -14,6 +14,9 @@ class GroupDependent
             // Default constructor
             GroupDependent();
 
+            // Initialize constructor
+            GroupDependent( double energy, double value );
+
             // Accessors and mutators //
 
             // Read value
