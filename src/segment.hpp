@@ -19,7 +19,11 @@ class Segment
 
         // Accessors and mutators //
 
+        // Return reference to material_
+        const Material &MaterialReference() const { return material_; };
 
+        // Read number of equally spaced cells
+        int NumCells() const { return num_cells_; };
 
         // Friend functions //
 

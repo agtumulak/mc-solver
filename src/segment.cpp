@@ -22,6 +22,7 @@ std::ostream &operator<< ( std::ostream &out, const Segment &obj )
 {
     out << "Width: \t" << obj.width_ << std::endl;
     out << "Number of cells: " << obj.num_cells_ << std::endl;
+    out << "Material address: " << &obj.material_ << std::endl;
     out << "Material: \n\n" << obj.material_ << std::endl;
 
     return out;

@@ -2,9 +2,11 @@
 // Aaron G. Tumulak
 
 // std includes
+#include <cassert>
 #include <iostream>
 
 // mc-solver includes
+#include "cell.hpp"
 #include "layout.hpp"
 #include "segment.hpp"
 
@@ -15,7 +17,23 @@ Layout::Layout()
 // Add segment to end
 void Layout::AddToEnd( Material material, double width, int num_cells )
 {
-   data_.push_back( Segment( material, width, num_cells ) );
+    data_.push_back( Segment( material, width, num_cells ) );
+}
+
+// Generate cells for use with Slab object
+Layout::cellvector Layout::GenerateCells() const
+{
+    cellvector output;
+    assert( !data_.empty() );
+    // Iterate through each segment in layout
+    for( auto it = data_.begin(); it != data_.end(); it++ )
+    {
+        for( int i = 0; i != it->NumCells(); i++ )
+        {
+            output.push_back( Cell( it->MaterialReference() ) );
+        }
+    }
+    return output;
 }
 
 // Friend functions //

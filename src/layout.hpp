@@ -8,17 +8,24 @@
 #include <vector>
 
 // mc-solver includes
+#include "cell.hpp"
 #include "segment.hpp"
 
 class Layout
 {
     public:
 
+        // Cell vector typedef
+        typedef std::vector<Cell> cellvector;
+
         // Default constructor
         Layout();
 
         // Add segment to end
         void AddToEnd( Material material, double width, int num_cells );
+
+        // Generate cells for use with Slab object
+        cellvector GenerateCells() const;
 
         // Overload operator<<()
         friend std::ostream &operator<< ( std::ostream &out, const Layout &obj );
