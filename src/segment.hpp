@@ -17,6 +17,12 @@ class Segment
         // Default constructor
         Segment( Material material, double width, int num_cells );
 
+        // Accessors and mutators //
+
+
+
+        // Friend functions //
+
         // Overload operator<<()
         friend std::ostream &operator<< ( std::ostream &out, const Segment &obj );
 
@@ -28,7 +34,7 @@ class Segment
         // Width
         const double width_;
 
-        // Number of equallu spaced cells
+        // Number of equally spaced cells
         const int num_cells_;
 };
 
