@@ -3,6 +3,7 @@
 
 // std includes
 #include <cassert>
+#include <numeric>
 
 // mc-solver includes
 #include "groupdependent.hpp"
@@ -34,6 +35,16 @@ void GroupDependent::Write( double energy, double value )
 
     // Write/overwrite value at energy
     data_[ energy ] = value;
+}
+
+// Sum all values
+double GroupDependent::GroupSum() const
+{
+    return std::accumulate( data_.begin(), data_.end(), 0.0,
+            []( const double &x, const energyvalpair &p )
+            {
+                return x + p.second;
+            });
 }
 
 // Friend functions //

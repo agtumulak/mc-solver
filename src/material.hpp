@@ -32,6 +32,7 @@ class Material
         void WriteFissChi( double energy, double value );
 
         void WriteExtSource( double energy, double value );
+        const GroupDependent &ExtSource() const { return ext_source_; };
 
         // Friend functions //
         

@@ -25,12 +25,18 @@ class GroupDependent
             // Write value
             void Write( double energy, double value );
 
+            // Sum all values
+            double GroupSum() const;
+
             // Friend functions //
             
             // Overload operator<<()
             friend std::ostream &operator<< ( std::ostream &out, const GroupDependent &obj );
 
         private:
+
+            // Pair typedef
+            typedef std::pair<double,double> energyvalpair;
 
             // Map typedef
             typedef std::map<double,double> groupmap;

@@ -9,8 +9,9 @@
 #include "cell.hpp"
 
 // Default constructor
-Cell::Cell( const Material &material ):
-    material_( material )
+Cell::Cell( const Material &material, double width ):
+    material_( material ),
+    width_( width )
 {}
 
 // Friend functions //

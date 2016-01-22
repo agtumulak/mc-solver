@@ -27,6 +27,9 @@ class Layout
         // Generate cells for use with Slab object
         cellvector GenerateCells() const;
 
+        // Calculate total source generation rate
+        double TotalSourceRate() const;
+
         // Overload operator<<()
         friend std::ostream &operator<< ( std::ostream &out, const Layout &obj );
 

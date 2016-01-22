@@ -14,7 +14,7 @@ class Cell
     public:
 
         // Default constructor
-        Cell( const Material &material );
+        Cell( const Material &material, double width );
 
         // Friend functions //
 
@@ -25,6 +25,9 @@ class Cell
 
         // Reference to material
         const Material &material_;
+
+        // Cell width
+        const double width_;
 
 };
 

@@ -4,6 +4,7 @@
 // std includes
 #include <cassert>
 #include <iostream>
+#include <numeric>
 
 // mc-solver includes
 #include "cell.hpp"
@@ -30,10 +31,21 @@ Layout::cellvector Layout::GenerateCells() const
     {
         for( int i = 0; i != it->NumCells(); i++ )
         {
-            output.push_back( Cell( it->MaterialReference() ) );
+            output.push_back( Cell( it->MaterialReference(), it->Width() ) );
         }
     }
     return output;
+}
+
+// Calculate total source generation rate
+double Layout::TotalSourceRate() const
+{
+    return  std::accumulate(
+            data_.begin(), data_.end(), 0.0,
+            []( const double &x, const Segment &s )
+            {
+                return x + s.MaterialReference().ExtSource().GroupSum() * s.Width();
+            });
 }
 
 // Friend functions //
