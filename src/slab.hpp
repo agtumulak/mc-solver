@@ -9,13 +9,16 @@
 // mc-solver includes
 #include "cell.hpp"
 #include "layout.hpp"
+#include "settings.hpp"
 
 class Slab
 {
     public:
 
+        double test() const { return layout_.TotalSourceRate(); };
+
         // Default constructor
-        Slab( const Layout &layout );
+        Slab( const Settings &settings, const Layout &layout );
 
         // Friend functions //
  
@@ -23,6 +26,12 @@ class Slab
         friend std::ostream &operator<< ( std::ostream &out, const Slab &obj );
 
     private:
+
+        // Spawn a source neutron
+        void SpawnSourceNeutron();
+
+        // Settings
+        Settings settings_;
 
         // Layout
         Layout layout_;
