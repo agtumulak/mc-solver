@@ -5,7 +5,6 @@
 
 // std includes
 #include <iostream>
-#include <vector>
 
 // mc-solver includes
 #include "material.hpp"
