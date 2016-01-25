@@ -5,6 +5,8 @@
 
 // std includes
 #include <iostream>
+#include <random>
+#include <vector>
 
 // mc-solver includes
 #include "cell.hpp"
@@ -15,7 +17,10 @@ class Slab
 {
     public:
 
-        double test() const { return layout_.TotalSourceRate(); };
+        double test1() const { return layout_.TotalSourceRate(); };
+
+        // Spawn a source neutron
+        void SpawnSourceNeutron();
 
         // Default constructor
         Slab( const Settings &settings, const Layout &layout );
@@ -27,17 +32,20 @@ class Slab
 
     private:
 
-        // Spawn a source neutron
-        void SpawnSourceNeutron();
-
         // Settings
         Settings settings_;
+
+        // Random number generator
+        std::default_random_engine generator_;
 
         // Layout
         Layout layout_;
 
         // Vector of cells
-        std::vector<Cell> data_;
+        std::vector<Cell> cells_;
+
+        // Vector of source rates
+        std::vector<double> source_rates_;
 };
 
 // Friend functions //

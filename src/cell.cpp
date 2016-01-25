@@ -14,11 +14,18 @@ Cell::Cell( const Material &material, double width ):
     width_( width )
 {}
 
+// Spawn a source neutron
+void Cell::SpawnSourceNeutron()
+{
+    std::cout << "Source neutron spawned from cell at: " << this << std::endl;
+}
+
 // Friend functions //
 
 // Overload operator<<()
 std::ostream &operator<< ( std::ostream &out, const Cell &obj )
 {
+    out << "Cell address: " << &obj << "\t";
     out << "Material address: " << &obj.material_;
     return out;
 }

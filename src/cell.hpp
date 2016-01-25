@@ -16,6 +16,9 @@ class Cell
         // Default constructor
         Cell( const Material &material, double width );
 
+        // Spawn a source neutron
+        void SpawnSourceNeutron();
+
         // Friend functions //
 
         // Overload operator<<()
