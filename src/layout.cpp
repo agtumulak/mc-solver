@@ -5,6 +5,7 @@
 #include <cassert>
 #include <iostream>
 #include <numeric>
+#include <vector>
 
 // mc-solver includes
 #include "cell.hpp"
@@ -22,9 +23,9 @@ void Layout::AddToEnd( Material material, double width, int num_cells )
 }
 
 // Generate cells for use with Slab object
-Layout::cellvector Layout::GenerateCells() const
+std::vector<Cell> Layout::GenerateCells() const
 {
-    cellvector output;
+    std::vector<Cell> output;
     assert( !data_.empty() );
     // Iterate through each segment in layout
     for( auto it = data_.begin(); it != data_.end(); it++ )

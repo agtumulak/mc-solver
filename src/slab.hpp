@@ -37,7 +37,7 @@ class Slab
         Layout layout_;
 
         // Vector of cells
-        Layout::cellvector data_;
+        std::vector<Cell> data_;
 };
 
 // Friend functions //

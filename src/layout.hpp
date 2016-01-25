@@ -15,9 +15,6 @@ class Layout
 {
     public:
 
-        // Cell vector typedef
-        typedef std::vector<Cell> cellvector;
-
         // Default constructor
         Layout();
 
@@ -25,7 +22,7 @@ class Layout
         void AddToEnd( Material material, double width, int num_cells );
 
         // Generate cells for use with Slab object
-        cellvector GenerateCells() const;
+        std::vector<Cell> GenerateCells() const;
 
         // Calculate total source generation rate
         double TotalSourceRate() const;
