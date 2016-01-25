@@ -24,6 +24,9 @@ class Layout
         // Generate cells for use with Slab object
         std::vector<Cell> GenerateCells() const;
 
+        // Create vector of source rates for each cell
+        std::vector<double> SourceRates() const;
+
         // Calculate total source generation rate
         double TotalSourceRate() const;
 

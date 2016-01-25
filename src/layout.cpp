@@ -38,6 +38,22 @@ std::vector<Cell> Layout::GenerateCells() const
     return output;
 }
 
+// Create vector of source rates for each cell
+std::vector<double> Layout::SourceRates() const
+{
+    std::vector<double> output;
+    assert( !data_.empty() );
+    // Iterate through each segment in layout
+    for( auto it = data_.begin(); it != data_.end(); it++ )
+    {
+        for( int i = 0; i != it->NumCells(); i++ )
+        {
+            output.push_back( it->MaterialReference().ExtSource().GroupSum() * it->Width() );
+        }
+    }
+    return output;
+}
+
 // Calculate total source generation rate
 double Layout::TotalSourceRate() const
 {
