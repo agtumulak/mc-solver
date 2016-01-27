@@ -19,14 +19,11 @@ class Material
 
         // Accessors and mutators //
 
-        void WriteNumberDensity( double value );
-        const double &NumberDensity() const { return num_density_; };
+        void WriteMacroAbsXsec( double energy, double value );
 
-        void WriteMicroAbsXsec( double energy, double value );
+        void WriteMacroScatXsec( double from_energy, double to_energy, double value );
 
-        void WriteMicroScatXsec( double from_energy, double to_energy, double value );
-
-        void WriteMicroFissXsec( double energy, double value );
+        void WriteMacroFissXsec( double energy, double value );
 
         void WriteFissNu( double value );
 
@@ -35,7 +32,7 @@ class Material
         void WriteExtSource( double energy, double value );
         const GroupDependent &ExtSource() const { return ext_source_; };
 
-        const GroupDependent &TotMicroXsec() const { return tot_micro_xsec_; };
+        const GroupDependent &TotMacroXsec() const { return tot_macro_xsec_; };
 
         // Friend functions //
         
@@ -44,20 +41,17 @@ class Material
 
     private:
 
-        // Number density
-        double num_density_;
-
         // Total microscopic cross section
-        GroupDependent tot_micro_xsec_;
+        GroupDependent tot_macro_xsec_;
 
-        // Microscopic absorption cross section
-        GroupDependent micro_abs_xsec_;
+        // Macroscopic absorption cross section
+        GroupDependent macro_abs_xsec_;
 
-        // Microscopic scattering cross section
-        GroupGroupDependent micro_scat_xsec_;
+        // Macroscopic scattering cross section
+        GroupGroupDependent macro_scat_xsec_;
 
-        // Microscopic fission cross section
-        GroupDependent micro_fiss_xsec_;
+        // Macroscopic fission cross section
+        GroupDependent macro_fiss_xsec_;
 
         // Average number of neutrons produced per fission, nu
         double fiss_nu_;

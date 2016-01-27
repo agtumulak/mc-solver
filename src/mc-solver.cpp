@@ -20,21 +20,19 @@ int main()
     settings_1.WriteHistories( 100 );
 
     // Create material mat_1 //
-    
     Material mat_1;
-    mat_1.WriteNumberDensity( 1.0 ); 
 
     // Absorption
-    mat_1.WriteMicroAbsXsec( 0.1, 1.0 );
+    mat_1.WriteMacroAbsXsec( 0.1, 1.0 );
 
     // Scattering
-    mat_1.WriteMicroScatXsec( 0.1, 0.1, 1.0 );
-    mat_1.WriteMicroScatXsec( 0.1, 14.0, 0.0 );
-    mat_1.WriteMicroScatXsec( 14.0, 0.1, 1.0 );
-    mat_1.WriteMicroScatXsec( 14.0, 14.0, 0.0 );
+    mat_1.WriteMacroScatXsec( 0.1, 0.1, 1.0 );
+    mat_1.WriteMacroScatXsec( 0.1, 14.0, 0.0 );
+    mat_1.WriteMacroScatXsec( 14.0, 0.1, 1.0 );
+    mat_1.WriteMacroScatXsec( 14.0, 14.0, 0.0 );
 
     // Fission
-    mat_1.WriteMicroFissXsec( 0.1, 1.0 );
+    mat_1.WriteMacroFissXsec( 0.1, 1.0 );
     mat_1.WriteFissNu( 1.0 );
     mat_1.WriteFissChi( 0.1, 0.0 );
     mat_1.WriteFissChi( 14.0, 1.0 );
@@ -44,21 +42,19 @@ int main()
     mat_1.WriteExtSource( 14.0, 1.0 );
 
     // Create material mat_2 //
-    
     Material mat_2;
-    mat_2.WriteNumberDensity( 2.0 ); 
 
     // Absorption
-    mat_2.WriteMicroAbsXsec( 0.1, 2.0 );
+    mat_2.WriteMacroAbsXsec( 0.1, 2.0 );
 
     // Scattering
-    mat_2.WriteMicroScatXsec( 0.1, 0.1, 2.0 );
-    mat_2.WriteMicroScatXsec( 0.1, 14.0, 0.0 );
-    mat_2.WriteMicroScatXsec( 14.0, 0.1, 2.0 );
-    mat_2.WriteMicroScatXsec( 14.0, 14.0, 0.0 );
+    mat_2.WriteMacroScatXsec( 0.1, 0.1, 2.0 );
+    mat_2.WriteMacroScatXsec( 0.1, 14.0, 0.0 );
+    mat_2.WriteMacroScatXsec( 14.0, 0.1, 2.0 );
+    mat_2.WriteMacroScatXsec( 14.0, 14.0, 0.0 );
 
     // Fission
-    mat_2.WriteMicroFissXsec( 0.1, 2.0 );
+    mat_2.WriteMacroFissXsec( 0.1, 2.0 );
     mat_2.WriteFissNu( 1.0 );
     mat_2.WriteFissChi( 0.1, 0.0 );
     mat_2.WriteFissChi( 14.0, 1.0 );
