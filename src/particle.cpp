@@ -8,17 +8,21 @@
 #include "particle.hpp"
 
 // Default constructor
-Particle::Particle( const Cell &cell, double position, double direction, double energy ):
-    cell_( cell ),
+
+Particle::Particle( std::vector<Cell>::iterator it, double position, double direction, double energy ):
+    it_( it ),
     position_( position ),
     direction_( direction ),
     energy_( energy )
 {}
 
+// Transport particle
+void Particle::Transport()
+{}
+
 // Friend functions //
 std::ostream &operator<< ( std::ostream &out, const Particle &obj )
 {
-    out << "Cell: " << &obj.cell_ << "\t";
     out << "Position: " << obj.position_ << "\t";
     out << "Direction: " << obj.direction_ << "\t";
     out << "Energy group: " << obj.energy_;

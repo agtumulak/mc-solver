@@ -3,6 +3,7 @@
 
 // std includes
 #include <iostream>
+#include <vector>
 
 // mc-solver includes
 #include "particle.hpp"
@@ -14,10 +15,10 @@ Cell::Cell( const Segment &segment, SegmentRng &segmentrng ):
     rng_( segmentrng )
 {}
 
-// Spawn a source neutron and place in bank
-Particle Cell::SpawnSourceNeutron()
+// Spawn a source neutron
+Particle Cell::SpawnSourceNeutron( std::vector<Cell>::iterator it )
 {
-    return Particle( *this, rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
+    return Particle( it, rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
 }
 
 // Friend functions //

@@ -5,8 +5,10 @@
 #include <cassert>
 #include <iostream>
 #include <random>
+#include <vector>
 
 // mc-solver includes
+#include "cell.hpp"
 #include "layout.hpp"
 #include "particle.hpp"
 #include "settings.hpp"
@@ -25,7 +27,16 @@ Slab::Slab( const Settings &settings, const Layout &layout ):
 // Spawn an isotropic source neutron, put in bank
 void Slab::SpawnSourceNeutron()
 {
-    bank_.push_back( cells_[ source_dist_( generator_ ) ].SpawnSourceNeutron() );
+    std::vector<Cell>::iterator it = next( cells_.begin(), source_dist_( generator_ ) );
+    bank_.push_back( it->SpawnSourceNeutron( it ) );
+}
+
+// Take source neutron, remove from bank
+void Slab::TransportNeutron()
+{
+    Particle active_neutron = *prev( bank_.end() );
+    active_neutron.Transport();
+    bank_.pop_back();
 }
 
 // List particles in bank

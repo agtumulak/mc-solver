@@ -19,7 +19,7 @@ class Cell
         Cell( const Segment &segment, SegmentRng &segmentrng );
 
         // Spawn a source neutron
-        Particle SpawnSourceNeutron();
+        Particle SpawnSourceNeutron( std::vector<Cell>::iterator it );
 
         // Friend functions //
 

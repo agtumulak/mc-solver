@@ -5,6 +5,7 @@
 
 // std includes
 #include <iostream>
+#include <vector>
 
 // Forward declarations
 class Cell;
@@ -14,15 +15,18 @@ class Particle
     public:
 
         // Default constructor
-        Particle( const Cell &cell, double position, double direction, double energy );
+        Particle( std::vector<Cell>::iterator it, double position, double direction, double energy );
+
+        // Transport particle
+        void Transport();
 
         // Friend functions //
         friend std::ostream &operator<< ( std::ostream &out, const Particle &obj );
 
     private:
 
-        // Const reference to particle cell
-        const Cell &cell_;
+        // Iterator pointing to current cell
+        std::vector<Cell>::iterator it_;
 
         // Particle position in cell
         double position_;

@@ -25,6 +25,9 @@ class Slab
         // Spawn an isotropic source neutron, put in bank
         void SpawnSourceNeutron();
 
+        // Take source neutron, remove from bank
+        void TransportNeutron();
+
         // Default constructor
         Slab( const Settings &settings, const Layout &layout );
 
