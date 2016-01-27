@@ -23,31 +23,39 @@ Particle::Particle( std::vector<Cell>::iterator it, double position, double dire
 // Transport particle
 void Particle::Transport()
 {
-    std::cout << "Distance to boundary: " << BoundaryDistance() << std::endl;
-    std::cout << "Distance to next event: " << SampleNextEventDistance() << std::endl;
-}
+    assert( direction_ != 0.0 );
 
-// Return distance to boundary
-double Particle::BoundaryDistance() const
-{
+    // Determine possible outcomes //
+    double boundary_distance = std::numeric_limits<double>::max();
+    double next_event_distance = std::numeric_limits<double>::max();
+
+    // Calculate distance to boundary
     if( direction_ < 0.0 )
     {
-        return -1.0 * position_ / direction_;
+        boundary_distance = -1.0 * position_ / direction_;
     }
-    else if ( direction_ > 0.0 )
+    else if( direction_ > 0.0 )
     {
-        return ( it_->SegmentReference().Width() - position_ ) / direction_;
+        boundary_distance = ( it_->SegmentReference().Width() - position_ ) / direction_;
     }
-    else {
-        assert( false );
-        return 0.0;
-    };
-}
+    else { assert( false ); };
 
-// Sample distance to next event
-double Particle::SampleNextEventDistance() const
-{
-    return it_->SegmentRngReference().SampleDistanceNextEvent( energy_ );
+    // Sample distance to next event
+    next_event_distance = it_->SegmentRngReference().SampleDistanceNextEvent( energy_ );
+
+    // Perform outcome //
+
+    if( boundary_distance < next_event_distance )
+    {
+        // Move particle
+        it_->TrackDistance( boundary_distance );
+    }
+    else if( next_event_distance < boundary_distance )
+    {
+        // Interact particle
+        it_->TrackDistance( next_event_distance );
+    }
+    else { assert( false ); };
 }
 
 // Friend functions //

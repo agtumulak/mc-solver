@@ -25,12 +25,6 @@ class Particle
 
     private:
 
-        // Return distance to boundary
-        double BoundaryDistance() const;
-
-        // Sample distance to next event
-        double SampleNextEventDistance() const;
-
         // Iterator pointing to current cell
         std::vector<Cell>::iterator it_;
 

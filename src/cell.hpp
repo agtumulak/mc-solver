@@ -21,6 +21,11 @@ class Cell
         // Spawn a source neutron
         Particle SpawnSourceNeutron( std::vector<Cell>::iterator it );
 
+        // Track particle movement distance
+        void TrackDistance( const double &add_length ) { track_length_ += add_length; };
+
+        // Accessors and mutators //
+
         // Return const reference to segment_
         const Segment &SegmentReference() const { return segment_; };
 
@@ -39,6 +44,9 @@ class Cell
 
         // Reference to segmentrng
         SegmentRng &rng_;
+
+        // Track length estimator
+        double track_length_;
 };
 
 // Friend functions //
