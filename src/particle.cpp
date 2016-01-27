@@ -23,6 +23,7 @@ void Particle::Transport()
 // Friend functions //
 std::ostream &operator<< ( std::ostream &out, const Particle &obj )
 {
+    out << "Current cell: " << &(*obj.it_) << "\t";
     out << "Position: " << obj.position_ << "\t";
     out << "Direction: " << obj.direction_ << "\t";
     out << "Energy group: " << obj.energy_;
