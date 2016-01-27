@@ -7,10 +7,17 @@
 // mc-solver includes
 #include "material.hpp"
 #include "layout.hpp"
+#include "settings.hpp"
 #include "slab.hpp"
 
 int main()
 {
+
+    // Create settings //
+    
+    Settings settings_1;
+    settings_1.WriteSeed( 10 );
+    settings_1.WriteHistories( 100 );
 
     // Create material mat_1 //
     
@@ -64,12 +71,15 @@ int main()
     Layout layout_1;
     layout_1.AddToEnd( mat_1, 100.0, 2 );
     layout_1.AddToEnd( mat_2, 50.0, 2 );
+    layout_1.AddToEnd( mat_1, 400.0, 1 );
 
     // Create slab
-    Slab slab_1( layout_1 );
+    Slab slab_1( settings_1, layout_1 );
 
     // Test
-    std::cout << '\n' << slab_1;
-
+    std::cout << slab_1 << std::endl;
+    slab_1.SpawnSourceNeutron();
+    slab_1.SpawnSourceNeutron();
+    
     return 0;
 }

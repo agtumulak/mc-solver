@@ -14,16 +14,16 @@
 // Default constructor
 Slab::Slab( const Settings &settings, const Layout &layout ):
     settings_( settings ),
-    generator_( std::default_random_engine( settings_.Seed() ) ),
     layout_( layout ),
-    cells_( layout_.GenerateCells() ),
-    source_rates_( layout_.SourceRates() )
+    generator_( std::default_random_engine( settings_.Seed() ) ),
+    segment_rngs_( layout.GenerateSegmentRngs( generator_ ) ),
+    cells_( layout_.GenerateCells( segment_rngs_ ) )
 {}
 
-// Spawn a source neutron
+// Spawn an isotropic source neutron
 void Slab::SpawnSourceNeutron()
 {
-    std::discrete_distribution<int> source_dist ( source_rates_.begin(), source_rates_.end() );
+    std::discrete_distribution<int> source_dist( layout_.SourceRates().begin(), layout_.SourceRates().end() );
     cells_[ source_dist( generator_ ) ].SpawnSourceNeutron();
 }
 

@@ -7,14 +7,15 @@
 #include <iostream>
 
 // mc-solver includes
-#include "material.hpp"
+#include "segment.hpp"
+#include "segmentrng.hpp"
 
 class Cell
 {
     public:
 
         // Default constructor
-        Cell( const Material &material, double width );
+        Cell( const Segment &segment, SegmentRng &segmentrng );
 
         // Spawn a source neutron
         void SpawnSourceNeutron();
@@ -26,12 +27,11 @@ class Cell
 
     private:
 
-        // Reference to material
-        const Material &material_;
+        // Const reference to segment
+        const Segment &segment_;
 
-        // Cell width
-        const double width_;
-
+        // Reference to segmentrng
+        SegmentRng &rng_;
 };
 
 // Friend functions //

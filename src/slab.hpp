@@ -11,15 +11,14 @@
 // mc-solver includes
 #include "cell.hpp"
 #include "layout.hpp"
+#include "segmentrng.hpp"
 #include "settings.hpp"
 
 class Slab
 {
     public:
 
-        double test1() const { return layout_.TotalSourceRate(); };
-
-        // Spawn a source neutron
+        // Spawn an isotropic source neutron
         void SpawnSourceNeutron();
 
         // Default constructor
@@ -32,20 +31,20 @@ class Slab
 
     private:
 
-        // Settings
-        Settings settings_;
+        // Const Settings
+        const Settings settings_;
+
+        // Const Layout
+        const Layout layout_;
 
         // Random number generator
         std::default_random_engine generator_;
 
-        // Layout
-        Layout layout_;
+        // Vector of SegmentRng for random number generation
+        std::vector<SegmentRng> segment_rngs_;
 
         // Vector of cells
         std::vector<Cell> cells_;
-
-        // Vector of source rates
-        std::vector<double> source_rates_;
 };
 
 // Friend functions //

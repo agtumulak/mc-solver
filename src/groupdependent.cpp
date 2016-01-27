@@ -3,7 +3,9 @@
 
 // std includes
 #include <cassert>
+#include <map>
 #include <numeric>
+#include <vector>
 
 // mc-solver includes
 #include "groupdependent.hpp"
@@ -16,6 +18,28 @@ GroupDependent::GroupDependent()
 GroupDependent::GroupDependent( double energy, double value ):
     data_( {{ energy, value }} )
 {}
+
+// Sum all values
+double GroupDependent::GroupSum() const
+{
+    return std::accumulate( data_.begin(), data_.end(), 0.0,
+            []( const double &x, const std::pair<double,double> &p )
+            { return x + p.second; });
+}
+
+// Groupwise energy distribution of source neutrons
+std::discrete_distribution<int> GroupDependent::GroupDistribution() const
+{
+    // Construct vector of map values by increasing key
+    assert( !data_.empty() );
+    std::vector<double> map_values;
+    for( auto it = data_.begin(); it != data_.end(); it++ )
+    {
+        map_values.push_back( it->second );
+    }
+    // Create distribution
+    return std::discrete_distribution<int> ( map_values.begin(), map_values.end() );
+};
 
 // Read value
 double GroupDependent::at( double energy ) const
@@ -37,14 +61,14 @@ void GroupDependent::Write( double energy, double value )
     data_[ energy ] = value;
 }
 
-// Sum all values
-double GroupDependent::GroupSum() const
+// Read energy at index
+double GroupDependent::energyat( unsigned int index ) const
 {
-    return std::accumulate( data_.begin(), data_.end(), 0.0,
-            []( const double &x, const energyvalpair &p )
-            {
-                return x + p.second;
-            });
+    // Check that index exists
+    assert( index < data_.size() );
+
+    // Return value
+    return std::next( data_.begin(), index )->first;
 }
 
 // Friend functions //
@@ -54,7 +78,7 @@ std::ostream &operator<< ( std::ostream &out, const GroupDependent &obj )
 {
     out << std::scientific;
 
-    for( auto it = obj.data_.begin(); it != obj.data_.end(); it++ )
+    for(auto it = obj.data_.begin(); it != obj.data_.end(); it++ )
     {
         out << "Group: " << it->first << "\t" << "Value: " << it->second << std::endl;
     }
