@@ -21,6 +21,9 @@ class Cell
         // Spawn a source neutron
         Particle SpawnSourceNeutron( std::vector<Cell>::iterator it );
 
+        // Return const reference to segment
+        const Segment &SegmentReference() const { return segment_; };
+
         // Friend functions //
 
         // Overload operator<<()

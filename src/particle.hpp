@@ -25,6 +25,9 @@ class Particle
 
     private:
 
+        // Return distance to boundary
+        double BoundaryDistance() const;
+
         // Iterator pointing to current cell
         std::vector<Cell>::iterator it_;
 
