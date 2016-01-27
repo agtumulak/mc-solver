@@ -3,7 +3,7 @@
 
 # Set options
 CC :=clang++ #--analyze -Qunused-arguments
-CFLAGS :=-std=c++11 -Wall
+CFLAGS :=-std=c++11 -Wall #-DNDEBUG
 LFLAGS :=
 TARGETNAME :=mc-solver
 
