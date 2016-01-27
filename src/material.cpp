@@ -23,18 +23,21 @@ void Material::WriteNumberDensity( double value )
 void Material::WriteMicroAbsXsec( double energy, double value )
 {
     micro_abs_xsec_.Write( energy, value );
+    tot_micro_xsec_.Add( energy, value );
 }
 
 // Scattering cross section
 void Material::WriteMicroScatXsec( double from_energy, double to_energy, double value )
 {
     micro_scat_xsec_.Write( from_energy, to_energy, value );
+    tot_micro_xsec_.Add( from_energy, value );
 }
 
 // Fission cross section
 void Material::WriteMicroFissXsec( double energy, double value )
 {
     micro_fiss_xsec_.Write( energy, value );
+    tot_micro_xsec_.Add( energy, value );
 }
 
 // Average number of neutrons per fission, nu
@@ -66,6 +69,7 @@ std::ostream &operator<< ( std::ostream &out, const Material &obj )
     out << "Microscopic absorption cross section: \n" << obj.micro_abs_xsec_ << std::endl;
     out << "Microscopic scattering cross sections: \n" << obj.micro_scat_xsec_ << std::endl;
     out << "Microscopic fission cross section: \n" << obj.micro_fiss_xsec_ << std::endl;
+    out << "Microscopic total cross section: \n" << obj.tot_micro_xsec_ << std::endl;
     out << "Average number of neutrons per fission, nu: " << obj.fiss_nu_ << "\n" << std::endl;
     out << "Energy distribution of fission neutrons, chi: \n" << obj.fiss_chi_ << std::endl;
     out << "External source: \n" << obj.ext_source_;

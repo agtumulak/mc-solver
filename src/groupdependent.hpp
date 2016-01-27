@@ -24,7 +24,9 @@ class GroupDependent
             // Groupwise energy distribution of source neutrons
             std::discrete_distribution<int> GroupDistribution() const;
 
-            // Iterator //
+            // Map of exponential distributions of each group
+            typedef std::map<double,std::exponential_distribution<double>> exp_dist_map;
+            exp_dist_map ExponentialDistributions() const;
 
             // Accessors and mutators //
 
@@ -33,6 +35,9 @@ class GroupDependent
 
             // Write value
             void Write( double energy, double value );
+
+            // Add value
+            void Add( double energy, double value );
 
             // Read energy at index
             double energyat( unsigned int index ) const;

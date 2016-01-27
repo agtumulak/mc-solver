@@ -20,6 +20,7 @@ class Material
         // Accessors and mutators //
 
         void WriteNumberDensity( double value );
+        const double &NumberDensity() const { return num_density_; };
 
         void WriteMicroAbsXsec( double energy, double value );
 
@@ -34,6 +35,8 @@ class Material
         void WriteExtSource( double energy, double value );
         const GroupDependent &ExtSource() const { return ext_source_; };
 
+        const GroupDependent &TotMicroXsec() const { return tot_micro_xsec_; };
+
         // Friend functions //
         
         // Overload operator<<()
@@ -43,6 +46,9 @@ class Material
 
         // Number density
         double num_density_;
+
+        // Total microscopic cross section
+        GroupDependent tot_micro_xsec_;
 
         // Microscopic absorption cross section
         GroupDependent micro_abs_xsec_;

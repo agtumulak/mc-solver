@@ -22,14 +22,17 @@ Particle::Particle( std::vector<Cell>::iterator it, double position, double dire
 
 // Transport particle
 void Particle::Transport()
-{}
+{
+    std::cout << "Distance to boundary: " << BoundaryDistance() << std::endl;
+    std::cout << "Distance to next event: " << SampleNextEventDistance() << std::endl;
+}
 
 // Return distance to boundary
 double Particle::BoundaryDistance() const
 {
     if( direction_ < 0.0 )
     {
-        return position_ / direction_;
+        return -1.0 * position_ / direction_;
     }
     else if ( direction_ > 0.0 )
     {
@@ -39,6 +42,12 @@ double Particle::BoundaryDistance() const
         assert( false );
         return 0.0;
     };
+}
+
+// Sample distance to next event
+double Particle::SampleNextEventDistance() const
+{
+    return it_->SegmentRngReference().SampleDistanceNextEvent( energy_ );
 }
 
 // Friend functions //

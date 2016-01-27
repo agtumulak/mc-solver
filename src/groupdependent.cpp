@@ -5,6 +5,7 @@
 #include <cassert>
 #include <map>
 #include <numeric>
+#include <random>
 #include <vector>
 
 // mc-solver includes
@@ -41,6 +42,19 @@ std::discrete_distribution<int> GroupDependent::GroupDistribution() const
     return std::discrete_distribution<int> ( map_values.begin(), map_values.end() );
 };
 
+// Map of exponential distributions of each group
+GroupDependent::exp_dist_map GroupDependent::ExponentialDistributions() const
+{
+    // Construct map of exponential distributions
+    assert( !data_.empty() );
+    GroupDependent::exp_dist_map output;
+    for( auto it = data_.begin(); it != data_.end(); it++ )
+    {
+        output[ it->first ] = std::exponential_distribution<double> ( it-> second );
+    }
+    return output;
+}
+
 // Read value
 double GroupDependent::at( double energy ) const
 {
@@ -57,8 +71,21 @@ void GroupDependent::Write( double energy, double value )
     // Check input arguments are valid
     assert( energy > 0.0 && value >= 0.0 );
 
-    // Write/overwrite value at energy
+    // Do not allow overwriting
+    assert( data_.find( energy ) == data_.end() );
+
+    // Write new value at energy
     data_[ energy ] = value;
+}
+
+// Add value
+void GroupDependent::Add( double energy, double value )
+{
+    // Check input arguments are valid
+    assert( energy > 0.0 && value >= 0.0 );
+
+    // Add value to energy
+    data_[ energy ] += value;
 }
 
 // Read energy at index

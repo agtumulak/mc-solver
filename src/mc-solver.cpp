@@ -80,6 +80,8 @@ int main()
     std::cout << slab_1 << std::endl;
     slab_1.SpawnSourceNeutron();
     slab_1.SpawnSourceNeutron();
+    slab_1.ListBank();
+    slab_1.TransportNeutron();
     
     return 0;
 }

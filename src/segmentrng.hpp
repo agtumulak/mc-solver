@@ -26,6 +26,9 @@ class SegmentRng
         // Sample energy group
         double SampleEnergyGroup();
 
+        // Sample distance to next event
+        double SampleDistanceNextEvent( double energy );
+
         // Accessors and mutators //
 
         // Generator
@@ -36,6 +39,7 @@ class SegmentRng
         // Distribution typedefs
         typedef std::uniform_real_distribution<double> uniform_dist;
         typedef std::discrete_distribution<int> discrete_dist;
+        typedef std::map<double,std::exponential_distribution<double>> exp_dist_map;
 
         // Reference to random number generator
         std::default_random_engine &generator_;
@@ -51,4 +55,7 @@ class SegmentRng
 
         // Distribution for cell source energy groups
         discrete_dist group_source_dist_;
+
+        // Map of energy groups and distributions to next event (0,inf)
+        exp_dist_map next_event_dists_;
 };

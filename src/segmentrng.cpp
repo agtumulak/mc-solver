@@ -14,7 +14,8 @@ SegmentRng::SegmentRng( std::default_random_engine &generator, const Segment &se
     segment_( segment ),
     cell_source_dist_( uniform_dist( std::nextafter( 0.0, 0.1 ), segment_.Width() / segment_.NumCells() ) ),
     isotropic_dist_( uniform_dist( -1.0, std::nextafter( 1.0, 1.1 ) ) ),
-    group_source_dist_( segment.MaterialReference().ExtSource().GroupDistribution() )
+    group_source_dist_( segment.MaterialReference().ExtSource().GroupDistribution() ),
+    next_event_dists_( segment.MaterialReference().TotMicroXsec().ExponentialDistributions() )
 {}
 
 // Sample cell position
@@ -35,3 +36,10 @@ double SegmentRng::SampleEnergyGroup()
     unsigned int index = group_source_dist_( generator_ );
     return segment_.MaterialReference().ExtSource().energyat( index );
 }
+
+// Sample distance to next event
+double SegmentRng::SampleDistanceNextEvent( double energy )
+{
+    return next_event_dists_[ energy ]( generator_ );
+}
+
