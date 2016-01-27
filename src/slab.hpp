@@ -11,6 +11,7 @@
 // mc-solver includes
 #include "cell.hpp"
 #include "layout.hpp"
+#include "particle.hpp"
 #include "segmentrng.hpp"
 #include "settings.hpp"
 
@@ -18,7 +19,10 @@ class Slab
 {
     public:
 
-        // Spawn an isotropic source neutron
+        // List particles in bank
+        void ListBank() const;
+
+        // Spawn an isotropic source neutron, put in bank
         void SpawnSourceNeutron();
 
         // Default constructor
@@ -45,6 +49,12 @@ class Slab
 
         // Vector of cells
         std::vector<Cell> cells_;
+
+        // Discrete distribution of source neutrons
+        std::discrete_distribution<int> source_dist_;
+
+        // Neutron bank
+        std::vector<Particle> bank_;
 };
 
 // Friend functions //

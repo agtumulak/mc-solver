@@ -14,13 +14,10 @@ Cell::Cell( const Segment &segment, SegmentRng &segmentrng ):
     rng_( segmentrng )
 {}
 
-// Spawn a source neutron
-void Cell::SpawnSourceNeutron()
+// Spawn a source neutron and place in bank
+Particle Cell::SpawnSourceNeutron()
 {
-    Particle neutron1( rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
-    std::cout << "Source neutron spawned from cell at: " << this << std::endl;
-    std::cout << "Neutron address: " << &neutron1 << std::endl;
-    std::cout << "Spawned neutron data: \n" << neutron1 << std::endl;
+    return Particle( *this, rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
 }
 
 // Friend functions //

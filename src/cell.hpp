@@ -7,6 +7,7 @@
 #include <iostream>
 
 // mc-solver includes
+#include "particle.hpp"
 #include "segment.hpp"
 #include "segmentrng.hpp"
 
@@ -18,7 +19,7 @@ class Cell
         Cell( const Segment &segment, SegmentRng &segmentrng );
 
         // Spawn a source neutron
-        void SpawnSourceNeutron();
+        Particle SpawnSourceNeutron();
 
         // Friend functions //
 
