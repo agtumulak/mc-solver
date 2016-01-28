@@ -7,6 +7,7 @@
 #include <iostream>
 
 // mc-solver includes
+#include "groupdependent.hpp"
 #include "particle.hpp"
 #include "segment.hpp"
 #include "segmentrng.hpp"
@@ -25,7 +26,7 @@ class Cell
                 const std::vector<Cell>::iterator &it );
 
         // Track particle movement distance
-        void TrackDistance( const double &add_length ) { track_length_ += add_length; };
+        void TrackDistance( const double &energy, const double &distance );
 
         // Accessors and mutators //
 
@@ -49,7 +50,7 @@ class Cell
         SegmentRng &rng_;
 
         // Track length estimator
-        double track_length_;
+        GroupDependent track_length_estimator_;
 };
 
 // Friend functions //

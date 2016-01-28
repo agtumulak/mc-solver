@@ -57,12 +57,12 @@ void Particle::Transport()
     if( boundary_distance < next_event_distance )
     {
         // Move particle
-        it_->TrackDistance( boundary_distance );
+        it_->TrackDistance( energy_, boundary_distance );
     }
     else if( next_event_distance < boundary_distance )
     {
         // Interact particle
-        it_->TrackDistance( next_event_distance );
+        it_->TrackDistance( energy_, next_event_distance );
     }
     else { assert( false ); };
 }

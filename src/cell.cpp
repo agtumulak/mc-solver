@@ -24,6 +24,12 @@ Particle Cell::SpawnSourceNeutron(
     return Particle( left, right, it, rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
 }
 
+// Track particle movement distance
+void Cell::TrackDistance( const double &energy, const double &distance )
+{
+    track_length_estimator_.Add( energy, distance );
+}
+
 // Friend functions //
 
 // Overload operator<<()
