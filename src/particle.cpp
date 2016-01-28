@@ -58,11 +58,13 @@ void Particle::Transport()
     {
         // Move particle
         it_->TrackDistance( energy_, boundary_distance );
+        CrossBoundary();
     }
     else if( next_event_distance < boundary_distance )
     {
         // Interact particle
         it_->TrackDistance( energy_, next_event_distance );
+        // Currently only absorption is tested
     }
     else { assert( false ); };
 }
