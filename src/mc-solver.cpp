@@ -74,10 +74,8 @@ int main()
 
     // Test
     std::cout << slab_1 << std::endl;
-    slab_1.SpawnSourceNeutron();
-    slab_1.SpawnSourceNeutron();
-    slab_1.ListBank();
-    slab_1.TransportNeutron();
+
+    slab_1.RunHistories();
     slab_1.ListTrackLengthEstimators( 0.1 );
     
     return 0;

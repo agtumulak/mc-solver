@@ -24,29 +24,17 @@ Slab::Slab( const Settings &settings, const Layout &layout ):
     source_dist_( std::discrete_distribution<int>( layout_.SourceRates().begin(), layout_.SourceRates().end() ) )
 {}
 
-// Spawn an isotropic source neutron, put in bank
-void Slab::SpawnSourceNeutron()
+// Run histories
+void Slab::RunHistories()
 {
-    assert( cells_.size() >= 2 );
-    std::vector<Cell>::iterator it = next( cells_.begin(), source_dist_( generator_ ) );
-    bank_.push_back( it->SpawnSourceNeutron( cells_.begin(), prev( cells_.end() ), it ) );
-}
-
-// Take source neutron, remove from bank
-void Slab::TransportNeutron()
-{
-    Particle active_neutron = *prev( bank_.end() );
-    active_neutron.Transport();
-    bank_.pop_back();
-}
-
-// List particles in bank
-void Slab::ListBank() const
-{
-    std::cout << "Particle bank contents: " << std::endl;
-    for( auto it = bank_.begin(); it != bank_.end(); it++ )
+    for( unsigned int i = 0; i != settings_.Histories(); i++ )
     {
-        std::cout << *it << std::endl;
+        std::cout << i << " out of " << settings_.Histories() << " complete..." << std::endl;
+        SpawnSourceNeutron();
+        while( !bank_.empty() )
+        {
+            PopNeutronAndTransport();
+        }
     }
 }
 
@@ -67,6 +55,32 @@ void Slab::ListTrackLengthEstimators( double energy ) const
             std::cout << ",";
         }
     }
+}
+
+// List particles in bank
+void Slab::ListBank() const
+{
+    std::cout << "Particle bank contents: " << std::endl;
+    for( auto it = bank_.begin(); it != bank_.end(); it++ )
+    {
+        std::cout << *it << std::endl;
+    }
+}
+
+// Spawn an isotropic source neutron, put in bank
+void Slab::SpawnSourceNeutron()
+{
+    assert( cells_.size() >= 2 );
+    std::vector<Cell>::iterator it = next( cells_.begin(), source_dist_( generator_ ) );
+    bank_.push_back( it->SpawnSourceNeutron( cells_.begin(), prev( cells_.end() ), it ) );
+}
+
+// Pop source neutron from bank and transport it
+void Slab::PopNeutronAndTransport()
+{
+    Particle active_neutron = *prev( bank_.end() );
+    active_neutron.Transport();
+    bank_.pop_back();
 }
 
 // Friend functions //

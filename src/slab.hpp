@@ -19,17 +19,14 @@ class Slab
 {
     public:
 
-        // Spawn an isotropic source neutron, put in bank
-        void SpawnSourceNeutron();
-
-        // Take source neutron, remove from bank
-        void TransportNeutron();
-
-        // List particles in bank
-        void ListBank() const;
+        // Run histories
+        void RunHistories();
 
         // List track length estimators
         void ListTrackLengthEstimators( double energy ) const;
+
+        // List particles in bank
+        void ListBank() const;
 
         // Default constructor
         Slab( const Settings &settings, const Layout &layout );
@@ -40,6 +37,12 @@ class Slab
         friend std::ostream &operator<< ( std::ostream &out, const Slab &obj );
 
     private:
+
+        // Spawn an isotropic source neutron, put in bank
+        void SpawnSourceNeutron();
+
+        // Pop source neutron from bank and transport it
+        void PopNeutronAndTransport();
 
         // Const Settings
         const Settings settings_;
