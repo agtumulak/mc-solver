@@ -31,6 +31,9 @@ class Particle
 
     private:
 
+        // Move particle if it crosses boundary
+        void CrossBoundary();
+
         // Const iterator pointing to leftmost and rightmost cells
         const std::vector<Cell>::const_iterator left_;
         const std::vector<Cell>::const_iterator right_;

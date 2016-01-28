@@ -2,6 +2,7 @@
 // Aaron G. Tumulak
 
 // std includes
+#include <cmath>
 #include <cassert>
 #include <iostream>
 
@@ -62,6 +63,49 @@ void Particle::Transport()
     {
         // Interact particle
         it_->TrackDistance( next_event_distance );
+    }
+    else { assert( false ); };
+}
+
+// Move particle if it crosses boundary
+void Particle::CrossBoundary()
+{
+    assert( direction_ != 0.0 );
+    if( direction_ < 0.0 )
+    {
+        if( it_ == left_ )
+        {
+            // Particle reaches vacuum and disappears
+            position_ = std::nextafter( 0.0, 0.1 );
+        }
+        else
+        {
+            // Particle moves to left adjacent cell
+            it_ = prev( it_ );
+            position_ = std::nextafter(
+                    it_->SegmentReference().Width() / it_->SegmentReference().NumCells(),
+                    0.0 );
+            Transport();
+        }
+    }
+    else if( direction_ > 0.0 )
+    {
+        if( it_ == right_ )
+        {
+            // Particle reaches reflecting boundary
+            position_ = std::nextafter(
+                    it_->SegmentReference().Width() / it_->SegmentReference().NumCells(),
+                    0.0 );
+            direction_ = - direction_;
+            Transport();
+        }
+        else
+        {
+            // Particle moves to right adjacent cell
+            it_ = next( it_ );
+            position_ = std::nextafter( 0.0, 0.1 );
+            Transport();
+        }
     }
     else { assert( false ); };
 }
