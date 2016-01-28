@@ -12,7 +12,7 @@
 SegmentRng::SegmentRng( std::default_random_engine &generator, const Segment &segment ):
     generator_( generator ),
     segment_( segment ),
-    cell_source_dist_( uniform_dist( std::nextafter( 0.0, 0.1 ), segment_.Width() / segment_.NumCells() ) ),
+    cell_source_dist_( uniform_dist( std::nextafter( 0.0, 0.1 ), segment_.CellWidth() ) ),
     isotropic_dist_( uniform_dist( -1.0, std::nextafter( 1.0, 1.1 ) ) ),
     group_source_dist_( segment.MaterialReference().ExtSource().GroupDistribution() ),
     next_event_dists_( segment.MaterialReference().TotMacroXsec().ExponentialDistributions() )

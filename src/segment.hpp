@@ -27,6 +27,9 @@ class Segment
         // Read number of equally spaced cells
         int NumCells() const { return num_cells_; };
 
+        // Read cell width
+        double CellWidth() const { return cell_width_; };
+
         // Friend functions //
 
         // Overload operator<<()
@@ -42,6 +45,9 @@ class Segment
 
         // Number of equally spaced cells
         const int num_cells_;
+
+        // Cell width
+        const double cell_width_;
 };
 
 // Friend functions //

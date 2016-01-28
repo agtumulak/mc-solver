@@ -45,7 +45,7 @@ void Particle::Transport()
     }
     else if( direction_ > 0.0 )
     {
-        boundary_distance = ( it_->SegmentReference().Width() - position_ ) / direction_;
+        boundary_distance = it_->SegmentReference().CellWidth() / direction_;
     }
     else { assert( false ); };
 
@@ -79,15 +79,12 @@ void Particle::CrossBoundary()
         {
             // Particle reaches vacuum and disappears
             position_ = std::nextafter( 0.0, 0.1 );
-            // std::cout << "Particle at " << &(*it_) << " entered vacuum" << std::endl;
         }
         else
         {
             // Particle moves to left adjacent cell
             it_ = prev( it_ );
-            position_ = std::nextafter(
-                    it_->SegmentReference().Width() / it_->SegmentReference().NumCells(),
-                    0.0 );
+            position_ = std::nextafter( it_->SegmentReference().CellWidth(), 0.0 );
             Transport();
         }
     }
@@ -96,11 +93,8 @@ void Particle::CrossBoundary()
         if( it_ == right_ )
         {
             // Particle reaches reflecting boundary
-            position_ = std::nextafter(
-                    it_->SegmentReference().Width() / it_->SegmentReference().NumCells(),
-                    0.0 );
+            position_ = std::nextafter( it_->SegmentReference().CellWidth(), 0.0 );
             direction_ = - direction_;
-            std::cout << "Particle at " << &(*it_) << " reflected" << std::endl;
             Transport();
         }
         else
