@@ -11,7 +11,15 @@
 
 // Default constructor
 
-Particle::Particle( std::vector<Cell>::iterator it, double position, double direction, double energy ):
+Particle::Particle(
+        const std::vector<Cell>::const_iterator &left,
+        const std::vector<Cell>::const_iterator &right,
+        const std::vector<Cell>::iterator &it,
+        double position,
+        double direction,
+        double energy ):
+    left_( left ),
+    right_( right ),
     it_( it ),
     position_( position ),
     direction_( direction ),

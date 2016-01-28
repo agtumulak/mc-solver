@@ -16,9 +16,12 @@ Cell::Cell( const Segment &segment, SegmentRng &segmentrng ):
 {}
 
 // Spawn a source neutron
-Particle Cell::SpawnSourceNeutron( std::vector<Cell>::iterator it )
+Particle Cell::SpawnSourceNeutron(
+        const std::vector<Cell>::const_iterator &left,
+        const std::vector<Cell>::const_iterator &right,
+        const std::vector<Cell>::iterator &it )
 {
-    return Particle( it, rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
+    return Particle( left, right, it, rng_.SamplePosition(), rng_.SampleDirection(), rng_.SampleEnergyGroup() );
 }
 
 // Friend functions //

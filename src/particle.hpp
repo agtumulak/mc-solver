@@ -15,7 +15,13 @@ class Particle
     public:
 
         // Default constructor
-        Particle( std::vector<Cell>::iterator it, double position, double direction, double energy );
+        Particle(
+                const std::vector<Cell>::const_iterator &left,
+                const std::vector<Cell>::const_iterator &right,
+                const std::vector<Cell>::iterator &it,
+                double position,
+                double direction,
+                double energy );
 
         // Transport particle
         void Transport();
@@ -24,6 +30,10 @@ class Particle
         friend std::ostream &operator<< ( std::ostream &out, const Particle &obj );
 
     private:
+
+        // Const iterator pointing to leftmost and rightmost cells
+        const std::vector<Cell>::const_iterator &left_;
+        const std::vector<Cell>::const_iterator &right_;
 
         // Iterator pointing to current cell
         std::vector<Cell>::iterator it_;

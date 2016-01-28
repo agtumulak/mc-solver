@@ -27,8 +27,9 @@ Slab::Slab( const Settings &settings, const Layout &layout ):
 // Spawn an isotropic source neutron, put in bank
 void Slab::SpawnSourceNeutron()
 {
+    assert( cells_.size() >= 2 );
     std::vector<Cell>::iterator it = next( cells_.begin(), source_dist_( generator_ ) );
-    bank_.push_back( it->SpawnSourceNeutron( it ) );
+    bank_.push_back( it->SpawnSourceNeutron( cells_.begin(), prev( cells_.end() ), it ) );
 }
 
 // Take source neutron, remove from bank

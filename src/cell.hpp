@@ -19,7 +19,10 @@ class Cell
         Cell( const Segment &segment, SegmentRng &segmentrng );
 
         // Spawn a source neutron
-        Particle SpawnSourceNeutron( std::vector<Cell>::iterator it );
+        Particle SpawnSourceNeutron(
+                const std::vector<Cell>::const_iterator &left,
+                const std::vector<Cell>::const_iterator &right,
+                const std::vector<Cell>::iterator &it );
 
         // Track particle movement distance
         void TrackDistance( const double &add_length ) { track_length_ += add_length; };
