@@ -85,7 +85,7 @@ void Slab::SpawnSourceNeutron()
 void Slab::PopNeutronAndTransport()
 {
     Particle active_neutron = *prev( bank_.end() );
-    active_neutron.Transport();
+    active_neutron.Transport( bank_ );
     bank_.pop_back();
 }
 

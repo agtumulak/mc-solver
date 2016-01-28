@@ -24,7 +24,7 @@ class Particle
                 double energy );
 
         // Transport particle
-        void Transport();
+        void Transport( std::vector<Particle> &bank );
 
         // Friend functions //
         friend std::ostream &operator<< ( std::ostream &out, const Particle &obj );

@@ -30,7 +30,7 @@ Particle::Particle(
 }
 
 // Transport particle
-void Particle::Transport()
+void Particle::Transport( std::vector<Particle> &bank )
 {
     assert( direction_ != 0.0 );
 
