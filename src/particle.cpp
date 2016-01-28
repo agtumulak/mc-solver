@@ -45,7 +45,7 @@ void Particle::Transport()
     }
     else if( direction_ > 0.0 )
     {
-        boundary_distance = it_->SegmentReference().CellWidth() / direction_;
+        boundary_distance = ( it_->SegmentReference().CellWidth() - position_ ) / direction_;
     }
     else { assert( false ); };
 
