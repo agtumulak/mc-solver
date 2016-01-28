@@ -27,9 +27,14 @@ Slab::Slab( const Settings &settings, const Layout &layout ):
 // Run histories
 void Slab::RunHistories()
 {
-    for( unsigned int i = 0; i != settings_.Histories(); i++ )
+    unsigned int histories = settings_.Histories();
+    for( unsigned int i = 0; i != histories; i++ )
     {
-        std::cout << i << " out of " << settings_.Histories() << " complete..." << std::endl;
+        if( i % 100000 == 0 )
+        {
+            double percent = (double) i / (double) histories * 100.0;
+            std::cout << percent << "\% complete..." << std::endl;
+        }
         SpawnSourceNeutron();
         while( !bank_.empty() )
         {
