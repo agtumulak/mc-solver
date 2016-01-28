@@ -32,8 +32,8 @@ class Particle
     private:
 
         // Const iterator pointing to leftmost and rightmost cells
-        const std::vector<Cell>::const_iterator &left_;
-        const std::vector<Cell>::const_iterator &right_;
+        const std::vector<Cell>::const_iterator left_;
+        const std::vector<Cell>::const_iterator right_;
 
         // Iterator pointing to current cell
         std::vector<Cell>::iterator it_;
