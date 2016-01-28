@@ -36,6 +36,9 @@ class Cell
         // Return reference to rng_
         SegmentRng &SegmentRngReference() { return rng_; };
 
+        // Return track length estimator
+        double TrackLengthEstimator( double energy ) const { return track_length_estimator_.at( energy ); };
+
         // Friend functions //
 
         // Overload operator<<()

@@ -78,6 +78,7 @@ int main()
     slab_1.SpawnSourceNeutron();
     slab_1.ListBank();
     slab_1.TransportNeutron();
+    slab_1.ListTrackLengthEstimators( 0.1 );
     
     return 0;
 }

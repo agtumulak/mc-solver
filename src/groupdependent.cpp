@@ -58,11 +58,14 @@ GroupDependent::exp_dist_map GroupDependent::ExponentialDistributions() const
 // Read value
 double GroupDependent::at( double energy ) const
 {
-    // Check that group exists
-    assert( data_.find( energy ) != data_.end() );
-
-    // Return value
-    return data_.at( energy );
+    if ( data_.find( energy ) != data_.end() )
+    {
+        return data_.at( energy );
+    }
+    else
+    {
+        return 0.0;
+    }
 }
 
 // Write value

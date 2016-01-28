@@ -19,14 +19,17 @@ class Slab
 {
     public:
 
-        // List particles in bank
-        void ListBank() const;
-
         // Spawn an isotropic source neutron, put in bank
         void SpawnSourceNeutron();
 
         // Take source neutron, remove from bank
         void TransportNeutron();
+
+        // List particles in bank
+        void ListBank() const;
+
+        // List track length estimators
+        void ListTrackLengthEstimators( double energy ) const;
 
         // Default constructor
         Slab( const Settings &settings, const Layout &layout );

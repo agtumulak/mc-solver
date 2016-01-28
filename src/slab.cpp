@@ -50,6 +50,25 @@ void Slab::ListBank() const
     }
 }
 
+// List scalar fluxes at energy group
+void Slab::ListTrackLengthEstimators( double energy ) const
+{
+    std::cout << "=>Track length estimators at energy: " << energy << std::endl;
+    for( auto it = cells_.begin(); it != cells_.end(); it++ )
+    {
+        std::cout << it->TrackLengthEstimator( energy );
+        // Add EOL otherwise add comma
+        if( it == prev( cells_.end() ) )
+        {
+            std::cout << std::endl;
+        }
+        else
+        {
+            std::cout << ",";
+        }
+    }
+}
+
 // Friend functions //
 
 // Overload operator<<()
