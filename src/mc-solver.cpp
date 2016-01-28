@@ -17,7 +17,7 @@ int main()
     
     Settings settings_1;
     settings_1.WriteSeed( 10 );
-    settings_1.WriteHistories( 1000000 );
+    settings_1.WriteHistories( 100000000 );
     settings_1.WriteProgressPeriod( 100000 );
 
     // Create material mat_1 //
