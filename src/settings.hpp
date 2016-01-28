@@ -21,6 +21,9 @@ class Settings
         void WriteHistories( unsigned int histories ) { histories_ = histories; };
         unsigned int Histories() const { return histories_; };
 
+        void WriteProgressPeriod( unsigned int period ) { progress_period_ = period; };
+        unsigned int ProgressPeriod() const { return progress_period_; };
+
         // Friend functions //
  
         // Overload I/O operators
@@ -33,6 +36,9 @@ class Settings
 
         // Number of histories
         unsigned int histories_;
+
+        // Period of progress reports
+        unsigned int progress_period_;
 };
 
 // Friend functions //

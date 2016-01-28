@@ -79,6 +79,7 @@ void Particle::CrossBoundary()
         {
             // Particle reaches vacuum and disappears
             position_ = std::nextafter( 0.0, 0.1 );
+            // std::cout << "Particle at " << &(*it_) << " entered vacuum" << std::endl;
         }
         else
         {
@@ -99,6 +100,7 @@ void Particle::CrossBoundary()
                     it_->SegmentReference().Width() / it_->SegmentReference().NumCells(),
                     0.0 );
             direction_ = - direction_;
+            std::cout << "Particle at " << &(*it_) << " reflected" << std::endl;
             Transport();
         }
         else

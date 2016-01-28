@@ -28,9 +28,10 @@ Slab::Slab( const Settings &settings, const Layout &layout ):
 void Slab::RunHistories()
 {
     unsigned int histories = settings_.Histories();
+    unsigned int progress_report_period = settings_.ProgressPeriod();
     for( unsigned int i = 0; i != histories; i++ )
     {
-        if( i % 100000 == 0 )
+        if( i % progress_report_period == 0 )
         {
             double percent = (double) i / (double) histories * 100.0;
             std::cout << percent << "\% complete..." << std::endl;

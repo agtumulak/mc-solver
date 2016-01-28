@@ -18,5 +18,6 @@ std::ostream &operator<< ( std::ostream &out, const Settings &obj )
 {
     out << "Seed: " << obj.seed_ << std::endl;
     out << "Histories: " << obj.histories_ << std::endl;
+    out << "Progress report period: " << obj.progress_period_ << std::endl;
     return out;
 }
