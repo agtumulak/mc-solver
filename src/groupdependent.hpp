@@ -21,7 +21,7 @@ class GroupDependent
             // Sum all values
             double GroupSum() const;
 
-            // Groupwise energy distribution of source neutrons
+            // Groupwise energy distribution of each group
             std::discrete_distribution<int> GroupDistribution() const;
 
             // Map of exponential distributions of each group

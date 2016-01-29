@@ -6,6 +6,7 @@
 // std includes
 #include <iostream>
 #include <map>
+#include <random>
 
 // mc-solver includes
 #include "groupdependent.hpp"
@@ -16,6 +17,12 @@ class GroupGroupDependent
 
             // Default constructor
             GroupGroupDependent();
+
+            // Map of discrete distributions of each group
+            typedef std::map<double,std::discrete_distribution<int>> discrete_dist_map;
+            discrete_dist_map DiscreteDistributions() const;
+
+            // Accessors and mutators //
 
             // Read value
             GroupDependent at( double energy ) const;

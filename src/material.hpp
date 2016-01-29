@@ -19,13 +19,15 @@ class Material
         Material();
 
         // Return a map of energy groups and distributions of interactions
-        std::map<double,std::discrete_distribution<int>> InteractionDistributions() const;
+        typedef std::map<double,std::discrete_distribution<int>> discrete_dist_map;
+        discrete_dist_map InteractionDistributions() const;
 
         // Accessors and mutators //
 
         void WriteMacroAbsXsec( double energy, double value );
 
         void WriteMacroScatXsec( double from_energy, double to_energy, double value );
+        const GroupGroupDependent &MacroScatXsec() const { return macro_scat_xsec_; };
 
         void WriteMacroFissXsec( double energy, double value );
 

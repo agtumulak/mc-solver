@@ -24,10 +24,10 @@ int main()
     Material mat_1;
 
     // Absorption
-    mat_1.WriteMacroAbsXsec( 0.1, 0.1 );
+    mat_1.WriteMacroAbsXsec( 0.1, 0.05 );
 
     // Scattering
-    mat_1.WriteMacroScatXsec( 0.1, 0.1, 0.0 );
+    mat_1.WriteMacroScatXsec( 0.1, 0.1, 0.05 );
     mat_1.WriteMacroScatXsec( 0.1, 14.0, 0.0 );
     mat_1.WriteMacroScatXsec( 14.0, 0.1, 0.0 );
     mat_1.WriteMacroScatXsec( 14.0, 14.0, 0.0 );

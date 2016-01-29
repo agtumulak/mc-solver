@@ -16,7 +16,8 @@ SegmentRng::SegmentRng( std::default_random_engine &generator, const Segment &se
     isotropic_dist_( uniform_dist( -1.0, std::nextafter( 1.0, 1.1 ) ) ),
     group_source_dist_( segment.MaterialReference().ExtSource().GroupDistribution() ),
     next_event_dists_( segment.MaterialReference().TotMacroXsec().ExponentialDistributions() ),
-    interaction_dists_( segment.MaterialReference().InteractionDistributions() )
+    interaction_dists_( segment.MaterialReference().InteractionDistributions() ),
+    scatter_dists_( segment.MaterialReference().MacroScatXsec().DiscreteDistributions() )
 {}
 
 // Sample cell position
@@ -49,3 +50,10 @@ SegmentRng::Interaction SegmentRng::SampleInteraction( double energy )
 {
     return static_cast<SegmentRng::Interaction>( interaction_dists_[ energy ]( generator_ ) );
 }
+
+// Sample scatter energy
+double SegmentRng::SampleScatterEnergy( double energy )
+{
+    return scatter_dists_[ energy ]( generator_ );
+}
+

@@ -28,7 +28,7 @@ double GroupDependent::GroupSum() const
             { return x + p.second; });
 }
 
-// Groupwise energy distribution of source neutrons
+// Groupwise energy distribution of each group
 std::discrete_distribution<int> GroupDependent::GroupDistribution() const
 {
     // Construct vector of map values by increasing key

@@ -40,6 +40,9 @@ class SegmentRng
         // Sample interaction
         Interaction SampleInteraction( double energy );
 
+        // Sample scatter energy
+        double SampleScatterEnergy( double energy );
+
         // Accessors and mutators //
 
         // Generator
@@ -51,7 +54,7 @@ class SegmentRng
         typedef std::uniform_real_distribution<double> uniform_dist;
         typedef std::discrete_distribution<int> discrete_dist;
         typedef std::map<double,std::exponential_distribution<double>> exp_dist_map;
-        typedef std::map<double,std::discrete_distribution<int>> interaction_dist_map;
+        typedef std::map<double,std::discrete_distribution<int>> discrete_dist_map;
 
         // Reference to random number generator
         std::default_random_engine &generator_;
@@ -72,5 +75,8 @@ class SegmentRng
         exp_dist_map next_event_dists_;
 
         // Map of energy groups and distribtions of interactions
-        interaction_dist_map interaction_dists_;
+        discrete_dist_map interaction_dists_;
+
+        // Map of energy groups and distributions of scattered neutrons
+        discrete_dist_map scatter_dists_;
 };

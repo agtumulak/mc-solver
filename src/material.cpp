@@ -13,9 +13,9 @@ Material::Material()
 {}
 
 // Return a map of energy groups and distributions of interactions
-std::map<double,std::discrete_distribution<int>> Material::InteractionDistributions() const
+Material::discrete_dist_map Material::InteractionDistributions() const
 {
-    std::map<double,std::discrete_distribution<int>> distributions;
+    Material::discrete_dist_map distributions;
     for( auto it = tot_macro_xsec_.slowest(); it != tot_macro_xsec_.fastest(); it++ )
     {
         double energy = it->first;

@@ -8,6 +8,7 @@
 
 // mc-solver includes
 #include "cell.hpp"
+#include "segmentrng.hpp"
 #include "particle.hpp"
 
 // Default constructor
@@ -47,7 +48,7 @@ void Particle::Transport( std::vector<Particle> &bank )
     {
         boundary_distance = ( it_->SegmentReference().CellWidth() - position_ ) / direction_;
     }
-    else { assert( false ); };
+    else { assert( false ); }
 
     // Sample distance to next event
     next_event_distance = it_->SegmentRngReference().SampleDistanceNextEvent( energy_ );
@@ -64,9 +65,9 @@ void Particle::Transport( std::vector<Particle> &bank )
     {
         // Interact particle
         it_->TrackDistance( energy_, next_event_distance );
-        // Currently only absorption is tested
+        Interact( bank );
     }
-    else { assert( false ); };
+    else { assert( false ); }
 }
 
 // Move particle if it crosses boundary
@@ -104,7 +105,28 @@ void Particle::CrossBoundary( std::vector<Particle> &bank)
         }
         Transport( bank );
     }
-    else { assert( false ); };
+    else { assert( false ); }
+}
+
+// Make particle interact
+void Particle::Interact( std::vector<Particle> &bank )
+{
+    // Sample an interaction
+    SegmentRng::Interaction outcome = it_->SegmentRngReference().SampleInteraction( energy_ );
+    if ( outcome == SegmentRng::ABSORPTION )
+    {
+        // Nothing happens and the particle goes away
+    }
+    else if ( outcome == SegmentRng::SCATTERING )
+    {
+        // Bank scattered particle
+        bank.push_back( Particle( left_, right_, it_, position_, it_->SegmentRngReference().SampleDirection(), energy_ ) );
+    }
+    else if ( outcome == SegmentRng::FISSION )
+    {
+        // Particle fissions
+    }
+    else { assert( false ); }
 }
 
 // Friend functions //

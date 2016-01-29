@@ -3,6 +3,7 @@
 
 // std includes
 #include <cassert>
+#include <vector>
 
 // mc-solver includes
 #include "groupgroupdependent.hpp"
@@ -10,6 +11,19 @@
 // Default constructor
 GroupGroupDependent::GroupGroupDependent()
 {}
+
+// Map of discrete distributions of each group
+GroupGroupDependent::discrete_dist_map GroupGroupDependent::DiscreteDistributions() const
+{
+    GroupGroupDependent::discrete_dist_map distributions;
+    for( auto it = data_.begin(); it != data_.end(); it++ )
+    {
+        double from_energy = it->first;
+        // Create map of scattering energy distributions for each from_energy
+        distributions[ from_energy ] = it->second.GroupDistribution();
+    }
+    return distributions;
+}
 
 // Read value
 GroupDependent GroupGroupDependent::at( double energy ) const

@@ -34,6 +34,9 @@ class Particle
         // Move particle if it crosses boundary
         void CrossBoundary( std::vector<Particle> &bank );
 
+        // Make particle interact
+        void Interact( std::vector<Particle> &bank );
+
         // Const iterator pointing to leftmost and rightmost cells
         const std::vector<Cell>::const_iterator left_;
         const std::vector<Cell>::const_iterator right_;
