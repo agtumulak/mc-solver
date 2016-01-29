@@ -3,6 +3,9 @@
 ## Introduction
 `mc-solver` is a Monte Carlo solver for neutron transport in slab geometry. It supports groupwise cross sections and scores scalar fluxes by energy group.
 
+## Quick Start
+From the project directory, do `/scripts/run.sh /path/to/output/file` to produce `/path/to/output/file.mat`, a Matlab file with each energy group's scalar flux. For now, the problem can be set up by editing `src/mc-solver.cpp` which I think is straightforward enough to edit for most material and geometry configurations.
+
 ## Building
 From the project directory run `make` to build the executable `mc-solver`.
 
