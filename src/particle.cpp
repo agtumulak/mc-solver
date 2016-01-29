@@ -58,7 +58,7 @@ void Particle::Transport( std::vector<Particle> &bank )
     {
         // Move particle
         it_->TrackDistance( energy_, boundary_distance );
-        CrossBoundary();
+        CrossBoundary( bank );
     }
     else if( next_event_distance < boundary_distance )
     {
@@ -70,7 +70,7 @@ void Particle::Transport( std::vector<Particle> &bank )
 }
 
 // Move particle if it crosses boundary
-void Particle::CrossBoundary()
+void Particle::CrossBoundary( std::vector<Particle> &bank)
 {
     assert( direction_ != 0.0 );
     if( direction_ < 0.0 )
@@ -85,7 +85,7 @@ void Particle::CrossBoundary()
             // Particle moves to left adjacent cell
             it_ = prev( it_ );
             position_ = std::nextafter( it_->SegmentReference().CellWidth(), 0.0 );
-            Transport();
+            Transport( bank );
         }
     }
     else if( direction_ > 0.0 )
@@ -95,15 +95,14 @@ void Particle::CrossBoundary()
             // Particle reaches reflecting boundary
             position_ = std::nextafter( it_->SegmentReference().CellWidth(), 0.0 );
             direction_ = - direction_;
-            Transport();
         }
         else
         {
             // Particle moves to right adjacent cell
             it_ = next( it_ );
             position_ = std::nextafter( 0.0, 0.1 );
-            Transport();
         }
+        Transport( bank );
     }
     else { assert( false ); };
 }

@@ -84,9 +84,9 @@ void Slab::SpawnSourceNeutron()
 // Pop source neutron from bank and transport it
 void Slab::PopNeutronAndTransport()
 {
-    Particle active_neutron = *prev( bank_.end() );
-    active_neutron.Transport( bank_ );
+    Particle active_neutron = bank_.back();
     bank_.pop_back();
+    active_neutron.Transport( bank_ );
 }
 
 // Friend functions //
