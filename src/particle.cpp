@@ -65,6 +65,8 @@ void Particle::Transport( std::vector<Particle> &bank )
     {
         // Interact particle
         it_->TrackDistance( energy_, next_event_distance );
+        // Update position
+        position_ += next_event_distance * direction_;
         Interact( bank );
     }
     else { assert( false ); }
