@@ -121,8 +121,12 @@ void Particle::Interact( std::vector<Particle> &bank )
     }
     else if ( outcome == SegmentRng::SCATTERING )
     {
-        // Bank scattered particle
-        bank.push_back( Particle( left_, right_, it_, position_, it_->SegmentRngReference().SampleDirection(), energy_ ) );
+        // Update particle direction
+        direction_ = it_->SegmentRngReference().SampleDirection();
+        // Update particle energy
+        energy_ = it_->SegmentRngReference().SampleScatterEnergy( energy_ );
+        // Transport
+        Transport( bank );
     }
     else if ( outcome == SegmentRng::FISSION )
     {

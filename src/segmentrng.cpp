@@ -54,6 +54,7 @@ SegmentRng::Interaction SegmentRng::SampleInteraction( double energy )
 // Sample scatter energy
 double SegmentRng::SampleScatterEnergy( double energy )
 {
-    return scatter_dists_[ energy ]( generator_ );
+    // Use total macroscopic cross section as source of energy groups
+    return segment_.MaterialReference().TotMacroXsec().energyat( scatter_dists_[ energy ]( generator_ ) );
 }
 
