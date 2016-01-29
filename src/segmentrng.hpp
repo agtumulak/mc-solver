@@ -14,6 +14,14 @@ class SegmentRng
 {
     public:
 
+        // Enumerate interaction types
+        enum Interaction
+        {
+            ABSORPTION,
+            SCATTERING,
+            FISSION
+        };
+
         // Default constructor
         SegmentRng( std::default_random_engine &generator, const Segment &segment );
 
@@ -29,6 +37,9 @@ class SegmentRng
         // Sample distance to next event
         double SampleDistanceNextEvent( double energy );
 
+        // Sample interaction
+        Interaction SampleInteraction( double energy );
+
         // Accessors and mutators //
 
         // Generator
@@ -40,6 +51,7 @@ class SegmentRng
         typedef std::uniform_real_distribution<double> uniform_dist;
         typedef std::discrete_distribution<int> discrete_dist;
         typedef std::map<double,std::exponential_distribution<double>> exp_dist_map;
+        typedef std::map<double,std::discrete_distribution<int>> interaction_dist_map;
 
         // Reference to random number generator
         std::default_random_engine &generator_;
@@ -58,4 +70,7 @@ class SegmentRng
 
         // Map of energy groups and distributions to next event (0,inf)
         exp_dist_map next_event_dists_;
+
+        // Map of energy groups and distribtions of interactions
+        interaction_dist_map interaction_dists_;
 };

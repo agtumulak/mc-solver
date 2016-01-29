@@ -6,10 +6,34 @@
 
 // mc-solver includes
 #include "material.hpp"
+#include "segmentrng.hpp"
 
 // Default constructor
 Material::Material()
 {}
+
+// Return a map of energy groups and distributions of interactions
+std::map<double,std::discrete_distribution<int>> Material::InteractionDistributions() const
+{
+    std::map<double,std::discrete_distribution<int>> distributions;
+    for( auto it = tot_macro_xsec_.slowest(); it != tot_macro_xsec_.fastest(); it++ )
+    {
+        double energy = it->first;
+        // Create map of interaction probabilities
+        std::map<SegmentRng::Interaction,double> probabilities;
+        probabilities[ SegmentRng::ABSORPTION ] = macro_abs_xsec_.at( energy );
+        probabilities[ SegmentRng::SCATTERING ] = macro_scat_xsec_.at( energy ).GroupSum();
+        probabilities[ SegmentRng::FISSION ] = macro_fiss_xsec_.at( energy );
+        // Construct vector of map values by increasing key
+        std::vector<double> map_values;
+        for( auto it = probabilities.begin(); it != probabilities.end(); it++ )
+        {
+            map_values.push_back( it->second );
+        }
+        distributions[ energy ] = std::discrete_distribution<int> ( map_values.begin(), map_values.end() );
+    }
+    return distributions;
+}
 
 // Accessors and mutators //
 

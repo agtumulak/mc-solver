@@ -5,6 +5,7 @@
 
 // std includes
 #include <iostream>
+#include <random>
 
 // mc-solver includes
 #include "groupdependent.hpp"
@@ -16,6 +17,9 @@ class Material
 
         // Default constructor
         Material();
+
+        // Return a map of energy groups and distributions of interactions
+        std::map<double,std::discrete_distribution<int>> InteractionDistributions() const;
 
         // Accessors and mutators //
 

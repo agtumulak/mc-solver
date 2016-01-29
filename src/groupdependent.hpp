@@ -42,6 +42,12 @@ class GroupDependent
             // Read energy at index
             double energyat( unsigned int index ) const;
 
+            // Iterators //
+
+            // Const iterators to fastest and slowest group
+            std::map<double,double>::const_iterator slowest() const { return data_.begin(); };
+            std::map<double,double>::const_iterator fastest() const { return data_.end(); };
+
             // Friend functions //
             
             // Overload operator<<()
