@@ -47,7 +47,7 @@ void Slab::RunHistories()
 // List scalar fluxes at energy group
 void Slab::ListTrackLengthEstimators( double energy ) const
 {
-    std::cout << "#scalar_flux_group_" << energy << "_mev" << std::endl;
+    std::cout << "#mc_scalar_flux_group_" << energy << "_mev" << std::endl;
     for( auto it = cells_.begin(); it != cells_.end(); it++ )
     {
         std::cout << it->TrackLengthEstimator( energy );

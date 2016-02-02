@@ -23,8 +23,8 @@ basename = os.path.splitext(csvfilename)[0]
 matfilename = basename + '.mat'
 
 # Tokens
-scalar_start = '#scalar'
-angular_start = '#angular'
+scalar_start = '#mc_scalar'
+angular_start = '#mc_angular'
 end_token = '#end'
 
 # Initialize dictionary
