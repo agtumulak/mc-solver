@@ -32,8 +32,10 @@ class Material
         void WriteMacroFissXsec( double energy, double value );
 
         void WriteFissNu( double value );
+        double FissNu() const { return fiss_nu_; };
 
         void WriteFissChi( double energy, double value );
+        const GroupDependent &FissChi() const { return fiss_chi_; };
 
         void WriteExtSource( double energy, double value );
         const GroupDependent &ExtSource() const { return ext_source_; };
