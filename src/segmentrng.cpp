@@ -17,7 +17,11 @@ SegmentRng::SegmentRng( std::default_random_engine &generator, const Segment &se
     group_source_dist_( segment.MaterialReference().ExtSource().GroupDistribution() ),
     next_event_dists_( segment.MaterialReference().TotMacroXsec().ExponentialDistributions() ),
     interaction_dists_( segment.MaterialReference().InteractionDistributions() ),
-    scatter_dists_( segment.MaterialReference().MacroScatXsec().DiscreteDistributions() )
+    scatter_dists_( segment.MaterialReference().MacroScatXsec().DiscreteDistributions() ),
+    fiss_chi_dist_( segment.MaterialReference().FissChi().GroupDistribution() ),
+    nu_lower_( static_cast<unsigned int> ( floor ( segment.MaterialReference().FissNu() ) ) ),
+    nu_upper_( static_cast<unsigned int> ( ceil ( segment.MaterialReference().FissNu() ) ) ),
+    fiss_nu_dist_( bernoulli_dist( (double) nu_upper_ - segment.MaterialReference().FissNu() ) )
 {}
 
 // Sample cell position
@@ -56,5 +60,25 @@ double SegmentRng::SampleScatterEnergy( double energy )
 {
     // Use total macroscopic cross section as source of energy groups
     return segment_.MaterialReference().TotMacroXsec().energyat( scatter_dists_[ energy ]( generator_ ) );
+}
+
+// Sample fission energy
+double SegmentRng::SampleFissionEnergy()
+{
+    return segment_.MaterialReference().TotMacroXsec().energyat( fiss_chi_dist_( generator_ ) );
+}
+
+// Sample number of neutrons produced in fission event
+double SegmentRng::SampleFissionNu()
+{
+    bool round_up = fiss_nu_dist_( generator_ );
+    if( round_up )
+    {
+        return nu_upper_;
+    }
+    else
+    {
+        return nu_lower_;
+    }
 }
 

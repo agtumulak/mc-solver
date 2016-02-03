@@ -43,6 +43,12 @@ class SegmentRng
         // Sample scatter energy
         double SampleScatterEnergy( double energy );
 
+        // Sample fission energy
+        double SampleFissionEnergy();
+
+        // Sample number of neutrons produced in fission event
+        double SampleFissionNu();
+
         // Accessors and mutators //
 
         // Generator
@@ -55,6 +61,7 @@ class SegmentRng
         typedef std::discrete_distribution<int> discrete_dist;
         typedef std::map<double,std::exponential_distribution<double>> exp_dist_map;
         typedef std::map<double,std::discrete_distribution<int>> discrete_dist_map;
+        typedef std::bernoulli_distribution bernoulli_dist;
 
         // Reference to random number generator
         std::default_random_engine &generator_;
@@ -79,4 +86,12 @@ class SegmentRng
 
         // Map of energy groups and distributions of scattered neutrons
         discrete_dist_map scatter_dists_;
+
+        // Map of fission source energy groups
+        discrete_dist fiss_chi_dist_;
+
+        // Distribution of neutrons produced per fission, nu
+        const unsigned int nu_lower_;
+        const unsigned int nu_upper_;
+        bernoulli_dist fiss_nu_dist_; 
 };
