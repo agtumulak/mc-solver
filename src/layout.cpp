@@ -22,7 +22,7 @@ void Layout::AddToEnd( Material material, double width, unsigned int num_cells )
 {
     assert( num_cells > 0 );
     data_.push_back( Segment( material, width, num_cells ) );
-    source_rates_.insert( source_rates_.end(), num_cells, material.ExtSource().GroupSum() * width );
+    source_rates_.insert( source_rates_.end(), num_cells, material.ExtSource().GroupSum() * width / num_cells );
 }
 
 // Generate SegmentRng object for use with Slab object
