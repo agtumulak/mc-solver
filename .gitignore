@@ -39,3 +39,6 @@
 
 # bin folder
 bin/
+
+# outputs folder
+outputs/
