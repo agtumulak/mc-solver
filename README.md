@@ -21,5 +21,11 @@ A fixed source, non-multiplying medium has been done using `mc-solver` with 1000
 ![moc-comparison](https://raw.githubusercontent.com/agtumulak/mc-solver/master/assets/scattering-ratio-comparison.png)
 
 ### Two-Group Repeating Slab
+A fixed source, two-group, multiplying medium has been modeled using `mc-solver`. The test slab is 87.5 cm thick with vacuum conditions at the left boundary (x = 0 cm) and reflecting conditions at the right boundary (x = 87.5 cm). The mean free path of fast and thermal neutrons were both 10 cm. Material properties of the slab are given below.
 
-![moc-comparison](https://raw.githubusercontent.com/agtumulak/mc-solver/master/assets/repeating-slab-comparison.png)
+![repeating-slab](https://raw.githubusercontent.com/agtumulak/mc-solver/master/assets/moderator-fuel-moderator-fuel-comparison-data.png)
+
+A comparison of `mc-solver` with `sn-solver-2` is given below. The solution for `mc-solver` used 1000000 histories.
+
+![repeating-slab](https://raw.githubusercontent.com/agtumulak/mc-solver/master/assets/moderator-fuel-moderator-fuel-comparison.png)
+
