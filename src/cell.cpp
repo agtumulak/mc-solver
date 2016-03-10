@@ -27,7 +27,7 @@ Particle Cell::SpawnSourceNeutron(
 // Track particle movement distance
 void Cell::TrackDistance( const double &energy, const double &distance )
 {
-    track_length_estimator_.Add( energy, distance );
+    track_length_estimator_.Add( energy, distance / segment_.CellWidth() );
 }
 
 // Friend functions //
