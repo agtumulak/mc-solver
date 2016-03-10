@@ -21,7 +21,7 @@ SegmentRng::SegmentRng( std::default_random_engine &generator, const Segment &se
     fiss_chi_dist_( segment.MaterialReference().FissChi().GroupDistribution() ),
     nu_lower_( static_cast<unsigned int> ( floor ( segment.MaterialReference().FissNu() ) ) ),
     nu_upper_( static_cast<unsigned int> ( ceil ( segment.MaterialReference().FissNu() ) ) ),
-    fiss_nu_dist_( bernoulli_dist( (double) nu_upper_ - segment.MaterialReference().FissNu() ) )
+    fiss_nu_dist_( bernoulli_dist( segment.MaterialReference().FissNu() - (double) nu_lower_ ) )
 {}
 
 // Sample cell position

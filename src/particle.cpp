@@ -130,8 +130,9 @@ void Particle::Interact( std::vector<Particle> &bank )
     }
     else if ( outcome == SegmentRng::FISSION )
     {
+        unsigned int num_fission_particles = it_->SegmentRngReference().SampleFissionNu();
         // Spawn a number of particles
-        for( unsigned int i = 0; i != it_->SegmentRngReference().SampleFissionNu(); i++ )
+        for( unsigned int i = 0; i != num_fission_particles; i++ )
         {
             bank.push_back( Particle( left_, right_, it_, position_, it_->SegmentRngReference().SampleDirection(), it_->SegmentRngReference().SampleFissionEnergy() ) );
         }
