@@ -130,7 +130,7 @@ void Particle::Interact( std::vector<Particle> &bank )
     }
     else if ( outcome == SegmentRng::FISSION )
     {
-        unsigned int num_fission_particles = it_->SegmentRngReference().SampleFissionNu();
+        unsigned int num_fission_particles = it_->SegmentRngReference().SampleFissionNu( energy_ );
         // Spawn a number of particles
         for( unsigned int i = 0; i != num_fission_particles; i++ )
         {

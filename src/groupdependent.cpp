@@ -3,6 +3,7 @@
 
 // std includes
 #include <cassert>
+#include <cmath>
 #include <map>
 #include <numeric>
 #include <random>
@@ -28,7 +29,7 @@ double GroupDependent::GroupSum() const
             { return x + p.second; });
 }
 
-// Groupwise energy distribution of each group
+// Groupwise energy distribution of value at each group
 std::discrete_distribution<int> GroupDependent::GroupDistribution() const
 {
     // Construct vector of map values by increasing key
@@ -50,7 +51,21 @@ GroupDependent::exp_dist_map GroupDependent::ExponentialDistributions() const
     GroupDependent::exp_dist_map output;
     for( auto it = data_.begin(); it != data_.end(); it++ )
     {
-        output[ it->first ] = std::exponential_distribution<double> ( it-> second );
+        output[ it->first ] = std::exponential_distribution<double> ( it->second );
+    }
+    return output;
+}
+
+// Map of bernoulli distributions of each group. Success is defined
+// as being rounded up.
+GroupDependent::bernoulli_dist_map GroupDependent::BernoulliDistirbutions() const
+{
+    // Construct map of bernoulli distributions
+    assert( !data_.empty() );
+    GroupDependent::bernoulli_dist_map output;
+    for( auto it = data_.begin(); it != data_.end(); it++ )
+    {
+         output[ it->first ] = std::bernoulli_distribution( it->second - floor( it->second ) );
     }
     return output;
 }

@@ -21,12 +21,17 @@ class GroupDependent
             // Sum all values
             double GroupSum() const;
 
-            // Groupwise energy distribution of each group
+            // Groupwise energy distribution of value at each group
             std::discrete_distribution<int> GroupDistribution() const;
 
             // Map of exponential distributions of each group
             typedef std::map<double,std::exponential_distribution<double>> exp_dist_map;
             exp_dist_map ExponentialDistributions() const;
+
+            // Map of bernoulli distributions of each group. Success is defined
+            // as being rounded up.
+            typedef std::map<double,std::bernoulli_distribution> bernoulli_dist_map;
+            bernoulli_dist_map BernoulliDistirbutions() const;
 
             // Accessors and mutators //
 

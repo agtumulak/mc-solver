@@ -2,6 +2,7 @@
 // Aaron G. Tumulak
 
 // std includes
+#include <cassert>
 #include <cmath>
 #include <iostream>
 
@@ -19,9 +20,7 @@ SegmentRng::SegmentRng( std::default_random_engine &generator, const Segment &se
     interaction_dists_( segment.MaterialReference().InteractionDistributions() ),
     scatter_dists_( segment.MaterialReference().MacroScatXsec().DiscreteDistributions() ),
     fiss_chi_dist_( segment.MaterialReference().FissChi().GroupDistribution() ),
-    nu_lower_( static_cast<unsigned int> ( floor ( segment.MaterialReference().FissNu() ) ) ),
-    nu_upper_( static_cast<unsigned int> ( ceil ( segment.MaterialReference().FissNu() ) ) ),
-    fiss_nu_dist_( bernoulli_dist( segment.MaterialReference().FissNu() - (double) nu_lower_ ) )
+    fiss_nu_round_up_dists_( segment.MaterialReference().FissNu().BernoulliDistirbutions() )
 {}
 
 // Sample cell position
@@ -69,16 +68,20 @@ double SegmentRng::SampleFissionEnergy()
 }
 
 // Sample number of neutrons produced in fission event
-double SegmentRng::SampleFissionNu()
+unsigned int SegmentRng::SampleFissionNu( double energy )
 {
-    bool round_up = fiss_nu_dist_( generator_ );
+    bool round_up = fiss_nu_round_up_dists_[ energy ]( generator_ );
     if( round_up )
     {
-        return nu_upper_;
+        return (unsigned int) ceil( segment_.MaterialReference().FissNu().at( energy ) );
+    }
+    else if( !round_up )
+    {
+        return (unsigned int) floor( segment_.MaterialReference().FissNu().at( energy ) );
     }
     else
     {
-        return nu_lower_;
+        assert( false );
+        return 0;
     }
 }
-
