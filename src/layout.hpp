@@ -5,6 +5,7 @@
 
 // std includes
 #include <iostream>
+#include <set>
 #include <random>
 #include <vector>
 
@@ -28,6 +29,9 @@ class Layout
 
         // Generate cells for use with Slab object
         std::vector<Cell> GenerateCells( std::vector<SegmentRng> &segment_rngs) const;
+
+        // Generate energy groups to use in calculation
+        std::set<double> GenerateEnergyGroups() const;
 
         // Accessors and mutators //
 

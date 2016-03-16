@@ -7,6 +7,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <set>
 
 // mc-solver includes
 #include "cell.hpp"
@@ -19,11 +20,11 @@ class Slab
 {
     public:
 
-        // Run histories
-        void RunHistories();
+        // Solve fixed source problem
+        void FixedSourceSolve();
 
         // List track length estimators
-        void ListTrackLengthEstimators( double energy ) const;
+        void ListTrackLengthEstimators() const;
 
         // List particles in bank
         void ListBank() const;
@@ -64,6 +65,9 @@ class Slab
 
         // Neutron bank
         std::vector<Particle> bank_;
+
+        // Set of energy groups for problem
+        std::set<double> energy_groups_;
 };
 
 // Friend functions //

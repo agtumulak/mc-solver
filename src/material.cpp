@@ -16,7 +16,7 @@ Material::Material()
 Material::discrete_dist_map Material::InteractionDistributions() const
 {
     Material::discrete_dist_map distributions;
-    for( auto it = tot_macro_xsec_.slowest(); it != tot_macro_xsec_.fastest(); it++ )
+    for( auto it = tot_macro_xsec_.slowest(); it != std::next( tot_macro_xsec_.fastest() ); it++ )
     {
         double energy = it->first;
         // Create map of interaction probabilities

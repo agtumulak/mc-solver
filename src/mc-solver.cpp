@@ -61,7 +61,7 @@ int main()
     // Fission
     core.WriteMacroFissXsec( 0.1, 6.0 );
     core.WriteMacroFissXsec( 14.0, 0.05 );
-    core.WriteFissNu( 0.1, 1.0 );
+    core.WriteFissNu( 0.1, 2.5 );
     core.WriteFissNu( 14.0, 2.5 );
     core.WriteFissChi( 0.1, 0.0 );
     core.WriteFissChi( 14.0, 1.0 );
@@ -79,9 +79,8 @@ int main()
     Slab slab_1( settings_1, layout_1 );
 
     // Test
-    slab_1.RunHistories();
-    slab_1.ListTrackLengthEstimators( 0.1 );
-    slab_1.ListTrackLengthEstimators( 14.0 );
-    
+    slab_1.FixedSourceSolve();
+    slab_1.ListTrackLengthEstimators();
+
     return 0;
 }

@@ -21,11 +21,12 @@ Slab::Slab( const Settings &settings, const Layout &layout ):
     generator_( std::default_random_engine( settings_.Seed() ) ),
     segment_rngs_( layout.GenerateSegmentRngs( generator_ ) ),
     cells_( layout_.GenerateCells( segment_rngs_ ) ),
-    source_dist_( std::discrete_distribution<int>( layout_.SourceRates().begin(), layout_.SourceRates().end() ) )
+    source_dist_( std::discrete_distribution<int>( layout_.SourceRates().begin(), layout_.SourceRates().end() ) ),
+    energy_groups_( layout_.GenerateEnergyGroups() )
 {}
 
-// Run histories
-void Slab::RunHistories()
+// Solve fixed source problem
+void Slab::FixedSourceSolve()
 {
     unsigned int histories = settings_.Histories();
     unsigned int progress_report_period = settings_.ProgressPeriod();
@@ -45,23 +46,26 @@ void Slab::RunHistories()
 }
 
 // List scalar fluxes at energy group
-void Slab::ListTrackLengthEstimators( double energy ) const
+void Slab::ListTrackLengthEstimators() const
 {
-    std::cout << "#mc_scalar_flux_group_" << energy << "_mev" << std::endl;
-    for( auto it = cells_.begin(); it != cells_.end(); it++ )
+    for( auto energy_it = energy_groups_.begin(); energy_it != energy_groups_.end(); energy_it++ )
     {
-        std::cout << it->TrackLengthEstimator( energy );
-        // Add EOL otherwise add comma
-        if( it == prev( cells_.end() ) )
+        std::cout << "#mc_scalar_flux_group_" << *energy_it << "_mev" << std::endl;
+        for( auto cell_it = cells_.begin(); cell_it != cells_.end(); cell_it++ )
         {
-            std::cout << std::endl;
+            std::cout << cell_it->TrackLengthEstimator( *energy_it );
+            // Add EOL otherwise add comma
+            if( cell_it == prev( cells_.end() ) )
+            {
+                std::cout << std::endl;
+            }
+            else
+            {
+                std::cout << ",";
+            }
         }
-        else
-        {
-            std::cout << ",";
-        }
+        std::cout << "#end" << std::endl;
     }
-    std::cout << "#end" << std::endl;
 }
 
 // List particles in bank
